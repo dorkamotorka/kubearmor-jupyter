@@ -1,0 +1,51 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: jupyter-notebook-lenient-allow-policy
+  namespace: jupyterhub-group1
+spec:
+  selector:
+    matchLabels:
+      # for selecting the pods to enforce upon
+      app: jupyterhub
+      component: singleuser-server
+  file:
+    matchDirectories:
+      # allow file access in . for all purposes
+      - dir: /
+        recursive: true
+      # can't write anything at system's binaries paths
+      - dir: /usr/local/bin/
+        readOnly: true
+      - dir: /usr/bin/
+        readOnly: true
+      - dir: /bin/
+        readOnly: true
+      # can't install any new packages globally
+      - dir: /usr/local/lib/python3.11/site-packages/
+        recursive: true
+  process:
+    matchDirectories:
+      # can't execute any process outside of these paths
+      - dir: /usr/local/bin/
+        recursive: true
+      - dir: /usr/bin/
+        recursive: true
+      - dir: /bin/
+        recursive: true
+  network:
+    matchProtocols:
+      # only let python programs access network
+      - fromSource:
+          path: /usr/local/lib/python3.11
+        protocol: udp
+      - fromSource:
+          path: /usr/local/lib/python3.11
+        protocol: tcp
+      - fromSource:
+          path: /usr/local/lib/python3.11
+        protocol: icmp
+      - fromSource:
+          path: /usr/local/lib/python3.11
+        protocol: raw
+  action: Allow
