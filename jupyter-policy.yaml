@@ -2,7 +2,7 @@ apiVersion: security.kubearmor.com/v1
 kind: KubeArmorPolicy
 metadata:
   name: jupyter-notebook-lenient-allow-policy
-  namespace: jupyterhub-group1
+  namespace: jupyter
 spec:
   selector:
     matchLabels:
@@ -37,15 +37,15 @@ spec:
     matchProtocols:
       # only let python programs access network
       - fromSource:
-          path: /usr/local/lib/python3.11
+        - path: /usr/local/lib/python3.11
         protocol: udp
       - fromSource:
-          path: /usr/local/lib/python3.11
+        - path: /usr/local/lib/python3.11
         protocol: tcp
       - fromSource:
-          path: /usr/local/lib/python3.11
+        - path: /usr/local/lib/python3.11
         protocol: icmp
       - fromSource:
-          path: /usr/local/lib/python3.11
+        - path: /usr/local/lib/python3.11
         protocol: raw
   action: Allow
