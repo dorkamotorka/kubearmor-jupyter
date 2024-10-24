@@ -38,11 +38,11 @@ hub:
       authenticator_class: dummy
     Authenticator:
       admin_users:
-        - dorkamotorka
+        - ebpfchirp
       allowed_users:
-        - dorkamotorka
+        - ebpfchirp
     DummyAuthenticator:
-      password: dorkamotorka
+      password: ebpfchirp
   service:
     type: ClusterIP
     annotations: {}
