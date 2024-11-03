@@ -27,7 +27,7 @@ To enforce the runtime security first [install KubeArmor](https://docs.kubearmor
 kubectl apply -f jupyter-policy.yaml
 ```
 
-KubeArmor by default only audits the events. If you want to block everything and just allow the actions as specified in the policy above, you need to execute:
+KubeArmor by default only audits the events. If you want to block everything and just allow the actions as specified in the `jupyter-policy.yaml`, you need to execute:
 
 ```
 kubectl annotate ns jupyter kubearmor-file-posture=block --overwrite
