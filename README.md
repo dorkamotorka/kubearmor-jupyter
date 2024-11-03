@@ -32,3 +32,5 @@ KubeArmor by default only audits the events. If you want to block everything and
 ```
 kubectl annotate ns jupyter kubearmor-file-posture=block --overwrite
 ```
+
+To try it out, run the `exploit.ipynb` script. You should get a `Permissions denied` error.
